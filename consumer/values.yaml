@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: dockeryt2022/yt_repo
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "consumer_app"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,6 +35,16 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
+  
+customArgs: 
+  python 
+  consumer.py 
+  -p 
+  "5672" 
+  -s 
+  rabbitmq
+
+restartPolicy: Always
 
 service:
   type: ClusterIP
